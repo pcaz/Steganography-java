@@ -94,7 +94,7 @@ public class Image {
 	public void saveImage(String fileOut, String format,int[] buf) {
 
 			
-	BufferedImage img = new BufferedImage(w,h,BufferedImage.TYPE_INT_ARGB);
+	BufferedImage img = new BufferedImage(w,h,BufferedImage.TYPE_INT_RGB);
 	img.getRaster().setDataElements(0,0,w,h,buf);
 	//new_buf = (int[])img.getRaster().getDataElements(0,0,w,h,buf);
 	 

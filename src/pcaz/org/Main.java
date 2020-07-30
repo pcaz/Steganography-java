@@ -33,6 +33,12 @@ public class Main {
     }
    
      
+   
+   int line = 1;    
+   if(ht.containsKey("-line")) {
+	   line = Integer.parseInt(ht.get("-line"));   
+     }
+    
    if(args[0].equals("codage")) {
        if((!ht.containsKey("-in")) || (!ht.containsKey("-out")) || (!ht.containsKey("-msg"))) {
 			   Usage();
@@ -40,15 +46,19 @@ public class Main {
 			   
    }
     
-   int line = 1;    
-   if(ht.containsKey("-line")) {
-	   line = Integer.parseInt(ht.get("-line"));   
-     }
-    
-  
    Codage codage = new Codage(ht.get("-in"),ht.get("-out"),ht.get("-msg"),line);
    codage.apply();
    }
+   
+   if(args[0].equals("decodage")){
+	   if(!ht.containsKey("-in")) {
+		   Usage();
+	   }
+	 Decodage decodage = new Decodage(ht.get("-in"), line);
+	 decodage.apply();
+	   
+   }
+   
 }
 
 	
