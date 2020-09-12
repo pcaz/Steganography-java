@@ -8,8 +8,6 @@ package pcaz.org;
  *
  */
 
-import pcaz.org.Codage;
-import pcaz.org.Decodage;
 import java.util.Hashtable;
 
 

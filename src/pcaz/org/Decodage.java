@@ -44,13 +44,14 @@ public class Decodage {
 		   		  if((red[initial+i]%2) == 1) {
 		   			  bits.set(i,true);
 		 		  }
-		   	
+		   		System.out.println("Red= "+red[initial+i]+", i= "+bits.get(i));
 	   	    }
 		msglength=Bits.convert(bits);	
 		
 		
-		
-		for(int i=8 ;i < msglength+8;i++) {
+		int i=8;
+	    char c;
+		do {
 			bits = new BitSet(8);
 			for(int j=0; j<8;j++) {
 				if((red[initial+i+j]%2) == 1) {
@@ -60,22 +61,33 @@ public class Decodage {
 					bits.set(j,false);
 				}
 			}
+	
+		c= Bits.toChar(bits);
+		msg.append(c);
+		
 			System.out.print("i="+ (i-8) +" ");
-			for(i=initial; i<initial+msglength; i++) {
-	   			for(int k=0; k<8; k++) {  
-	   				
-				if(bits.get(k)) {
-	   				  System.out.print("1");
-	   			  }
-	   			  else {
-	   				  System.out.print("0");
-	   			  }
-				
-				}
-	   			System.out.println();
 			
-			}
+			for(int k=0; k<8; k++) {  	
+				if(bits.get(k)) {
+				  System.out.print("1");
+				}
+				else {
+				  System.out.print("0");
+				}
 		}
+		
+	        System.out.print(", "+c);
+			System.out.println();	
+		
+	    i=i+8;		
+		
+		}while ((i-8) < msglength*8);
+		
+		
+			
+		
+		
+		 
 			
 		System.out.println(msg.toString());
 		return msg.toString();

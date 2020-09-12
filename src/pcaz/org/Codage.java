@@ -52,6 +52,7 @@ public class Codage {
         for(int i=0; i<8; ++i) {
    		 a[i] = ((red[i+initial]/2)*2)+(bits.get(i) ? 1 : 0);
    		 red[i+initial] = a[i]; 
+   		 System.out.println(a[i]);
    	    }
    		
         //for(int i=0; i<8; i++) red[i+initial]=a[i]	;	
@@ -60,7 +61,8 @@ public class Codage {
         
         bits  = Bits.convert(msg);
         a = new int[bits.length()+8];
-       
+        
+        System.out.println("Nb bits = "+bits.length()+8);
         for(int i=8; i < bits.length()+8; i++) {
       		 a[i] = ((red[i+initial]/2)*2)+(bits.get(i-8) ? 1 : 0);
        		 red[i+initial] = a[i];         	
