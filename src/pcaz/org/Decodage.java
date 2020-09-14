@@ -91,7 +91,7 @@ public class Decodage {
 		
 		 
 			
-		System.out.println(msg.toString());
+//		System.out.println(msg.toString());
 		return msg.toString();
 	}
 

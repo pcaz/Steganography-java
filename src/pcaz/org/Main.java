@@ -22,6 +22,7 @@ public class Main {
 		
 		if ((args.length==0) || (args.length%2 == 0)) {
 			Usage();
+			System.exit(0);
 	}
 		  
 		
@@ -31,31 +32,41 @@ public class Main {
     }
    
      
-   
+ 
    int line = 1;    
    if(ht.containsKey("-line")) {
 	   line = Integer.parseInt(ht.get("-line"));   
      }
     
-   if(args[0].equals("codage")) {
+   switch(args[0])
+   {
+		   
+   case "codage":
+ 
        if((!ht.containsKey("-in")) || (!ht.containsKey("-out")) || (!ht.containsKey("-msg"))) {
 			   Usage();
-	
-			   
-   }
+	}
     
-   Codage codage = new Codage(ht.get("-in"),ht.get("-out"),ht.get("-msg"),line);
-   codage.apply();
+       Codage codage = new Codage(ht.get("-in"),ht.get("-out"),ht.get("-msg"),line);
+       codage.apply();
+       break;
+   
+  
+   case "decodage":
+   			
+   			if(!ht.containsKey("-in")) {
+   					Usage();
+   					System.exit(0);
+   			}
+	  
+   			Decodage decodage = new Decodage(ht.get("-in"), line);
+   			System.out.println(decodage.apply());
+   			break;
+   
+   default:		
+   			Usage();
    }
    
-   if(args[0].equals("decodage")){
-	   if(!ht.containsKey("-in")) {
-		   Usage();
-	   }
-	 Decodage decodage = new Decodage(ht.get("-in"), line);
-	 decodage.apply();
-	   
-   }
    
 }
 
@@ -66,7 +77,7 @@ public class Main {
 		program_name = program_name.substring(0,program_name.lastIndexOf(Constraint.file_separator));
 		program_name = program_name.substring(program_name.lastIndexOf(Constraint.file_separator)+1);
 		
-		System.out.println(program_name+": "+"codage/decodage -in fileIn -out fileOut -msg \"message\" [line = x]");
+		System.out.println(program_name+": "+"codage/decodage -in fileIn -out fileOut -msg \"message\" [line x]");
 	}
 
 }
