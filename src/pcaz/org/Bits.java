@@ -8,14 +8,26 @@ public class Bits {
 	
 	  public static BitSet convert(int value) {
 	    BitSet bits = new BitSet();
+	    
 	    int index = 7;
-	    while (value != 0) {
-	      if (value % 2 != 0) {
-	        bits.set(index);
+	    while (index>=0) {
+	      if (value % 2 == 1) {
+	    	  bits.set(index);
 	      }
 	      --index;
 	      value = value >>> 1;
 	    }
+	    
+/*	    
+	    int index = 0;
+	    while (index<8) {
+	      if (value % 2 == 1) {
+	    	  bits.set(index);
+	      }
+	      ++index;
+	      value = value >>> 1;
+	    }
+*/	    
 	    return bits;
 	  }
 	  

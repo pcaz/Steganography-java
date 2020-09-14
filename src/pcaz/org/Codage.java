@@ -59,15 +59,38 @@ public class Codage {
         
         // convert message+
         
+        byte[] message=msg.getBytes();
+        int i=8;
+        int j=0;
+        while( j <msg.length()) 
+        {
+        	bits = Bits.convert(message[j]);
+        	for(int k=0; k<8;k++) {
+        		red[i+j+k+initial] =(red[i+j+k+initial]/2)*2;
+        		if (bits.get(k)) 
+        			red[i+j+k+initial]+=1;
+        		
+        		System.out.println("i="+i+", j="+j+", k="+k+", red="+ red[i+j+k+initial]);
+        	}
+        	j++;
+        }
+/*        for(int i=0; i< msg.length();i++) {
+        	
+        
+        	for(int k=0; k < 8; k++) {
+        		a[j+k] = ((red[i+initial]/2)*2)+(bits.get(i-8) ? 1 : 0);
+      		 red[i+initial] = a[i];         	
+       }
+        }
         bits  = Bits.convert(msg);
         a = new int[bits.length()+8];
         
-        System.out.println("Nb bits = "+bits.length()+8);
-        for(int i=8; i < bits.length()+8; i++) {
+    
+        for(int l=8; l < bits.length()+8; l++) {
       		 a[i] = ((red[i+initial]/2)*2)+(bits.get(i-8) ? 1 : 0);
        		 red[i+initial] = a[i];         	
         }
-        
+*/        
         img=Image.setImage(red,green,blue, alpha);
         
 
