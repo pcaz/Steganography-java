@@ -66,13 +66,15 @@ public class Codage {
         {
         	bits = Bits.convert(message[j]);
         	for(int k=0; k<8;k++) {
-        		red[i+j+k+initial] =(red[i+j+k+initial]/2)*2;
+        		red[i+k+initial] =(red[i+k+initial]/2)*2;
         		if (bits.get(k)) 
-        			red[i+j+k+initial]+=1;
+        			red[i+k+initial]+=1;
         		
-        		System.out.println("i="+i+", j="+j+", k="+k+", red="+ red[i+j+k+initial]);
+        		System.out.println("i="+i+", j="+j+", k="+k+", offset="+(i+k+initial)+", red="+ red[i+k+initial]);
         	}
         	j++;
+       	    i=i+8;
+        	
         }
 /*        for(int i=0; i< msg.length();i++) {
         	

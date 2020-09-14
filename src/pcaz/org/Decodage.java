@@ -60,7 +60,9 @@ public class Decodage {
 				else {
 					bits.set(j,false);
 				}
+				System.out.println("i= "+i+", j="+j+", offset="+(initial+i+j)+", red="+red[initial+i+j]);	
 			}
+			
 	
 		c= Bits.toChar(bits);
 		msg.append(c);
