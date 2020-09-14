@@ -64,7 +64,7 @@ public class Bits {
 	    	 value=value+1;
 	     }
 	      
-	    System.out.println("length = "+bits.length()+ ", "+bits.get(i));
+	  
 	   }
        
 	    return value;
@@ -87,7 +87,7 @@ public class Bits {
 	  public static char toChar(BitSet bitSet) {
 		   int val= convert(bitSet);
 		   char result=(char)val;
-		   System.out.println(bitSet.length());
+//		   System.out.println(bitSet.length());
 		    result &= Character.MAX_VALUE;
 	        return result;
 	    }

@@ -43,7 +43,7 @@ public class Codage {
 		int[] alpha=Image.getAlpha();
 		
 		// Message length
-		System.out.println("W="+w+", h="+h+", line="+line+", initial="+initial);
+//		System.out.println("W="+w+", h="+h+", line="+line+", initial="+initial);
 	
 		BitSet bits = Bits.convert(msg.length());
 		    
@@ -52,7 +52,7 @@ public class Codage {
         for(int i=0; i<8; ++i) {
    		 a[i] = ((red[i+initial]/2)*2)+(bits.get(i) ? 1 : 0);
    		 red[i+initial] = a[i]; 
-   		 System.out.println(a[i]);
+//   		 System.out.println(a[i]);
    	    }
    		
         //for(int i=0; i<8; i++) red[i+initial]=a[i]	;	
@@ -70,7 +70,7 @@ public class Codage {
         		if (bits.get(k)) 
         			red[i+k+initial]+=1;
         		
-        		System.out.println("i="+i+", j="+j+", k="+k+", offset="+(i+k+initial)+", red="+ red[i+k+initial]);
+//        		System.out.println("i="+i+", j="+j+", k="+k+", offset="+(i+k+initial)+", red="+ red[i+k+initial]);
         	}
         	j++;
        	    i=i+8;
