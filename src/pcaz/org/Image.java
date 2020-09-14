@@ -4,7 +4,11 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
-
+/**
+ * 
+ * @author pascaz10
+ *
+ */
 public class Image {
 	
 	int[] image;
@@ -21,9 +25,14 @@ public class Image {
 	public Image() {
            
 	}
-	
+	/**
+	 * loadImage load an image file
+	 * @param fileIn
+	 */
 	public void loadImage(String fileIn) {
+		
 		BufferedImage buf=null;
+		
 		try {
 			buf = ImageIO.read(new File(fileIn));
 		 }
@@ -35,6 +44,8 @@ public class Image {
 		 h = buf.getHeight();
 		 bf= new BufferedImage(w,h,BufferedImage.TYPE_INT_ARGB);
 		 
+		 // copy the buffer in bf
+		 
 		 for(int j=0; j<h;j++) {
 			 for(int i=0; i<w; i++){
 				 bf.setRGB(i,j,buf.getRGB(i,j));
@@ -42,7 +53,8 @@ public class Image {
 
 		 }
 		
-		
+		// create news buffers for colors
+		 
 		 red = new int[w*h];
 		 green = new int[w*h];
 		 blue = new int[w*h];
@@ -50,11 +62,17 @@ public class Image {
 		 
 	}
 	
+	/**
+	 * getImage: get the buffer
+	 * 
+	 * @return image 
+	 */
 	public int[] getImage() {
 		
 		 image= bf.getRGB(0,0,w,h,null,0,w);
 /*		 
-		 for(int j=0; j<h;j++) {
+// another solution
+ 		 for(int j=0; j<h;j++) {
 			 for(int i=0;i<w; i++) {
 				 	     Color c = new Color(image[j*w+i]);
 						 red[j*w+i]= c.getRed();
@@ -64,6 +82,8 @@ public class Image {
 			 }
 		 }
 */	 
+		 // all colors in buffers for all bits
+		 
 		 for(int j=0; j<h;j++) {
 			 for(int i=0;i<w; i++) {
 						 blue[j*w+i]= (image[j*w+i] & 0x000000ff) >>> 0;
@@ -77,39 +97,48 @@ public class Image {
 		 
 		
 	}
+	
+	/**
+	 * setImage Set a new buffer for an image
+	 * 
+	 * @param red red buffer
+	 * @param green green buffer
+	 * @param blue blue buffer
+	 * @param alpha alpha buffer
+	 * @return
+	 */
 	public int[] setImage( int[] red, int[] green, int[] blue, int[] alpha) {
 		
 	int[] buf;
 	buf = new int[w*h];
+	
+	// create the image buffer composite
 	for(int j=0; j<h ; j++) {
 		for(int i=0; i<w ; i++) {
 			buf[j*w+i] = blue[j*w+i] + (green[j*w+i] << 8) + (red[j*w+i] << 16) + (alpha[j*w+i] << 24); 
 		}
 	}
+	
+	// the set it in bf
 	bf.getRaster().setDataElements(0,0,w,h,buf); 
 	return buf;
 	}
 	
 	
+	/**
+	 * saveImage: Save an image buffer to a file
+	 * 
+	 * @param fileOut
+	 * @param format (today only png)
+	 * @param buf
+	 */
 	public void saveImage(String fileOut, String format,int[] buf) {
 
-			
+	//create a new buffered image (RGB without transparency)		
 	BufferedImage img = new BufferedImage(w,h,BufferedImage.TYPE_INT_RGB);
 	img.getRaster().setDataElements(0,0,w,h,buf);
-	//new_buf = (int[])img.getRaster().getDataElements(0,0,w,h,buf);
 	 
-	 int[] val= new int[w*h];
-	 int[] new_buf = new int[w*h];
-	
-	 new_buf = img.getRGB(0,0,w,h,null,0,w);
-	 val=bf.getRGB(0,0,w,h,null,0,w);
-	 for (int j=0; j< h; j++) {
-		 for(int i=0; i<w; i++) {
-			 if (new_buf[j*w+i] != val[j*w+i]) {
-				 System.out.println("i= "+i+" j= "+j+" buf = "+new_buf[j*w+i] +" val= "+val[j*w+i]);	
-			 }
-		 }
-	}
+	// write new file 
 	try {
 		File outputFile = new File(fileOut);
 		ImageIO.write(img, format, outputFile);
